@@ -7,7 +7,7 @@ const SkeletonLoader = ({ width, height }) => {
         width: width || "100%",
         height: height || "100%",
       }}
-      className="bg-slate-500 animate-pulse"
+      className="bg-[#474747] animate-pulse"
     />
   );
 };

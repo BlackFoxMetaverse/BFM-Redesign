@@ -1,7 +1,10 @@
+import PortfolioNavbar from "@/components/portfolio_components/modules/Navbar";
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="">{children}</body>
-    </html>
+    <main className="bg-black size-full min-h-screen text-white">
+      <PortfolioNavbar />
+      {children}
+    </main>
   );
 }

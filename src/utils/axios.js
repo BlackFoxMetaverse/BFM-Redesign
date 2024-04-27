@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export default function instance() {
-  axios.create({
-    baseURL: "https://api.blackfoxmetaverse.io",
-  });
-}
+const instance = axios.create({
+  baseURL: "https://api.blackfoxmetaverse.io",
+});
+
+export default instance;
