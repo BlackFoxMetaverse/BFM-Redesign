@@ -6,6 +6,8 @@ import { useSellerProfile } from "@/utils/hooks/useSellerProfile";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
+  FaAngleDown,
+  FaAngleUp,
   FaBehance,
   FaDribbble,
   FaGithub,
@@ -64,8 +66,8 @@ const PortfolioDetails = ({ details }) => {
   return error ? (
     <div className="size-full"></div>
   ) : (
-    <div className="w-11/12 mx-auto flex lg:flex-row flex-col gap-10 py-6">
-      <div className="left lg:w-1/4 shrink-0 space-y-7">
+    <div className="w-11/12 mx-auto flex sm:flex-row flex-col sm:gap-10 gap-5 py-6">
+      <div className="left xl:w-1/4 lg:w-1/3 sm:w-1/2 shrink-0 sm:space-y-7 space-y-4">
         <div
           className={`max-w-full ${
             loading && "aspect-video overflow-hidden min-h-24"
@@ -106,6 +108,11 @@ const PortfolioDetails = ({ details }) => {
           )}
         </div>
         {sellerData && (
+          <div className="sm:hidden block">
+            <PrimaryButton>Edit Profile</PrimaryButton>
+          </div>
+        )}
+        {sellerData && (
           <PrimaryButton
             color={"white"}
             fontWeight={400}
@@ -133,7 +140,7 @@ const PortfolioDetails = ({ details }) => {
         <div
           className={`w-full overflow-hidden max-w-full ${
             loading ? "aspect-[7/1] min-h-10" : "py-2 px-5"
-          } rounded-2xl bg-[#1D1D1D]`}
+          } rounded-xl bg-[#1D1D1D]`}
         >
           {loading ? (
             <SkeletonLoader />
@@ -152,85 +159,189 @@ const PortfolioDetails = ({ details }) => {
             </div>
           )}
         </div>
-        <div
-          className={`w-full overflow-hidden ${
-            loading ? "aspect-video" : "min-h-24"
-          } max-w-full rounded-2xl bg-[#1D1D1D]`}
+        <button
+          type="button"
+          style={{
+            backgroundColor: "#1D1D1D",
+          }}
+          className="sm:hidden size-full px-5 py-3 font-extrabold tracking-wide justify-center rounded-xl flex items-center gap-2"
+          onClick={() => setViewAll(!viewAll)}
         >
-          {loading ? (
-            <SkeletonLoader />
-          ) : (
-            <SellerCard
-              className={"w-full flex flex-col justify-between gap-2 p-4"}
-              title={"Skills I have"}
-              subtitle={`${sellerData?.skills?.length} skills learned`}
-            >
-              <div className="flex items-center gap-2 flex-wrap">
-                {sellerData?.skills?.map((skill, index) => (
-                  <div
-                    className="border border-white text-sm opacity-60 py-2 px-3 rounded-3xl"
-                    key={index}
-                  >
-                    {skill}
-                  </div>
-                ))}
-              </div>
-            </SellerCard>
-          )}
-        </div>
+          {viewAll ? "View Less" : "View More"}{" "}
+          <FaAngleUp
+            className={`${
+              viewAll ? "" : "rotate-180"
+            } transition-all duration-300 font-extrabold ease-in-out`}
+          />
+        </button>
+
+        {/* Mobile */}
         <div
-          className={`w-full overflow-hidden ${
-            loading && "aspect-video min-h-24"
-          } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          className={`space-y-4 sm:hidden block ${
+            viewAll ? "scale-y-100 h-full" : "-translate-y-1/2 scale-y-0 h-0"
+          } transform transition-all duration-300 ease-in-out`}
         >
-          {loading ? (
-            <SkeletonLoader />
-          ) : (
-            <SellerCard
-              className={"w-full flex flex-col justify-between gap-2 p-4"}
-              title={"Service I provide"}
-              subtitle={`${sellerData?.services?.length} Services Provided`}
-            >
-              <div className="flex items-center gap-2 flex-wrap">
-                {sellerData?.services?.map((service, index) => (
-                  <div
-                    className="border border-white text-sm opacity-60 py-2 px-3 rounded-3xl"
-                    key={index}
-                  >
-                    {service}
-                  </div>
-                ))}
-              </div>
-            </SellerCard>
-          )}
-        </div>
-        <div
-          className={`w-full overflow-hidden ${
-            loading && "aspect-video min-h-32"
-          } max-w-full rounded-2xl bg-[#1D1D1D]`}
-        >
-          {loading ? (
-            <SkeletonLoader />
-          ) : (
-            <SellerCard
-              className={"w-full flex flex-col justify-between gap-7 p-4"}
-              title={" Projects I have done"}
-              subtitle={`${sellerData?.experienceDetails?.length} projects in total`}
-            >
-              {sellerData?.experienceDetails ? (
-                <div className="flex flex-col gap-2">
-                  {sellerData?.experienceDetails?.map((exp) => (
-                    <ExperienceDetails {...exp} key={exp?._id} />
+          <div
+            className={`w-full overflow-hidden ${
+              loading ? "aspect-video" : "min-h-24"
+            } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <SellerCard
+                className={"w-full flex flex-col justify-between gap-2 p-4"}
+                title={"Skills I have"}
+                subtitle={`${sellerData?.skills?.length} skills learned`}
+              >
+                <div className="flex items-center gap-2 flex-wrap">
+                  {sellerData?.skills?.map((skill, index) => (
+                    <div
+                      className="border border-white text-sm opacity-60 py-2 px-3 rounded-3xl"
+                      key={index}
+                    >
+                      {skill}
+                    </div>
                   ))}
                 </div>
-              ) : (
-                <div></div>
-              )}
-            </SellerCard>
-          )}
+              </SellerCard>
+            )}
+          </div>
+          <div
+            className={`w-full overflow-hidden ${
+              loading && "aspect-video min-h-24"
+            } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <SellerCard
+                className={"w-full flex flex-col justify-between gap-2 p-4"}
+                title={"Service I provide"}
+                subtitle={`${sellerData?.services?.length} Services Provided`}
+              >
+                <div className="flex items-center gap-2 flex-wrap">
+                  {sellerData?.services?.map((service, index) => (
+                    <div
+                      className="border border-white text-sm opacity-60 py-2 px-3 rounded-3xl"
+                      key={index}
+                    >
+                      {service}
+                    </div>
+                  ))}
+                </div>
+              </SellerCard>
+            )}
+          </div>
+          <div
+            className={`w-full overflow-hidden ${
+              loading && "aspect-video min-h-32"
+            } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <SellerCard
+                className={"w-full flex flex-col justify-between gap-7 p-4"}
+                title={" Projects I have done"}
+                subtitle={`${sellerData?.experienceDetails?.length} projects in total`}
+              >
+                {sellerData?.experienceDetails ? (
+                  <div className="flex flex-col gap-2">
+                    {sellerData?.experienceDetails?.map((exp) => (
+                      <ExperienceDetails {...exp} key={exp?._id} />
+                    ))}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </SellerCard>
+            )}
+          </div>
+        </div>
+
+        {/* Other devices */}
+        <div className="space-y-7 sm:block hidden">
+          <div
+            className={`w-full overflow-hidden ${
+              loading ? "aspect-video" : "min-h-24"
+            } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <SellerCard
+                className={"w-full flex flex-col justify-between gap-2 p-4"}
+                title={"Skills I have"}
+                subtitle={`${sellerData?.skills?.length} skills learned`}
+              >
+                <div className="flex items-center gap-2 flex-wrap">
+                  {sellerData?.skills?.map((skill, index) => (
+                    <div
+                      className="border border-white text-sm opacity-60 py-2 px-3 rounded-3xl"
+                      key={index}
+                    >
+                      {skill}
+                    </div>
+                  ))}
+                </div>
+              </SellerCard>
+            )}
+          </div>
+          <div
+            className={`w-full overflow-hidden ${
+              loading && "aspect-video min-h-24"
+            } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <SellerCard
+                className={"w-full flex flex-col justify-between gap-2 p-4"}
+                title={"Service I provide"}
+                subtitle={`${sellerData?.services?.length} Services Provided`}
+              >
+                <div className="flex items-center gap-2 flex-wrap">
+                  {sellerData?.services?.map((service, index) => (
+                    <div
+                      className="border border-white text-sm opacity-60 py-2 px-3 rounded-3xl"
+                      key={index}
+                    >
+                      {service}
+                    </div>
+                  ))}
+                </div>
+              </SellerCard>
+            )}
+          </div>
+          <div
+            className={`w-full overflow-hidden ${
+              loading && "aspect-video min-h-32"
+            } max-w-full rounded-2xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <SellerCard
+                className={"w-full flex flex-col justify-between gap-7 p-4"}
+                title={" Projects I have done"}
+                subtitle={`${sellerData?.experienceDetails?.length} projects in total`}
+              >
+                {sellerData?.experienceDetails ? (
+                  <div className="flex flex-col gap-2">
+                    {sellerData?.experienceDetails?.map((exp) => (
+                      <ExperienceDetails {...exp} key={exp?._id} />
+                    ))}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </SellerCard>
+            )}
+          </div>
         </div>
       </div>
-      <div className="right space-y-7 size-full">
+      <div className="right sm:space-y-7 space-y-4 size-full">
         <div
           className={`w-full overflow-hidden ${
             loading && "aspect-[4/1] min-h-24"

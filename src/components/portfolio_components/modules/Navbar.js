@@ -18,7 +18,9 @@ const PortfolioNavbar = () => {
           className="object-contain"
         />
         <div className="flex items-center gap-7 text-balance">
-          <PrimaryButton>Edit Profile</PrimaryButton>
+          <div className="sm:block hidden">
+            <PrimaryButton>Edit Profile</PrimaryButton>
+          </div>
           <SecondaryButton>Share & Download</SecondaryButton>
         </div>
       </div>

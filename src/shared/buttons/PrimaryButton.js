@@ -24,7 +24,7 @@ const PrimaryButton = ({
         backgroundColor: backgroundColor || "#fff",
         borderRadius: 8,
       }}
-      className="px-5 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="px-5 py-2 disabled:opacity-50 text-nowrap whitespace-nowrap disabled:cursor-not-allowed"
     >
       {children}
     </button>

@@ -8,13 +8,13 @@ const MediaGallery = ({ medias, backgroundColor }) => {
       style={{
         backgroundColor: backgroundColor || "#1D1D1D",
       }}
-      className={`grid md:grid-cols-3 grid-cols-1 gap-4 size-full p-5 rounded-xl`}
+      className={`grid lg:grid-cols-3 grid-cols-1 gap-4 size-full p-5 rounded-xl`}
     >
       {medias?.map((media, index) => (
         <div
           key={index}
           className={`${
-            index === 0 ? "md:col-span-2 md:row-span-2" : ""
+            index === 0 ? "lg:col-span-2 lg:row-span-2" : ""
           } md:aspect-square size-full`}
         >
           <Media mediaUrl={media} />

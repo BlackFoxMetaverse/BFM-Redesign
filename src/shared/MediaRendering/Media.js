@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useRef } from "react";
+import { IoIosVideocam } from "react-icons/io";
 import Swal from "sweetalert2";
 
 const Media = ({ mediaUrl }) => {
@@ -30,27 +31,32 @@ const Media = ({ mediaUrl }) => {
       ".webm" ||
       ".avchd"
   ) ? (
-    <video
-      className="object-cover cursor-pointer size-full rounded-xl"
-      src={mediaUrl}
-      ref={videoRef}
-      muted
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onClick={() => {
-        Swal.fire({
-          html: `<video
-                    class="object-cover size-full max-h-screen rounded-xl"
-                    src="${mediaUrl}"
-                    autoplay
-                    onended="() => ${Swal.close()}"
-                  />`,
-          showConfirmButton: false,
-          showCloseButton: true,
-          padding: 0,
-        });
-      }}
-    />
+    <div className="size-full relative">
+      <div className="z-10 size-fit bg-black/50 p-0.5 absolute top-1 right-1 rounded-full">
+        <IoIosVideocam />
+      </div>
+      <video
+        className="object-cover cursor-pointer size-full rounded-xl"
+        src={mediaUrl}
+        ref={videoRef}
+        muted
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => {
+          Swal.fire({
+            html: `<video
+                        class="object-cover size-full max-h-screen rounded-xl"
+                        src="${mediaUrl}"
+                        autoplay
+                        onended="() => ${Swal.close()}"
+                      />`,
+            showConfirmButton: false,
+            showCloseButton: true,
+            padding: 0,
+          });
+        }}
+      />
+    </div>
   ) : (
     <Image
       src={mediaUrl}
