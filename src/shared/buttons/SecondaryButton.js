@@ -9,8 +9,12 @@ const SecondaryButton = ({
   width,
   height,
   type,
-  disabled,
+  disabled = false,
   fontSize,
+  borderRadius,
+  px = 20,
+  py = 8,
+  className = "",
 }) => {
   return (
     <button
@@ -18,15 +22,19 @@ const SecondaryButton = ({
       disabled={disabled}
       onClick={onClick}
       style={{
-        width: width || "100%",
+        width: width || "",
         height: height || "auto",
         border: border || "none",
         backgroundColor: backgroundColor || "#141414",
         borderColor: borderColor || "transparent",
         fontSize: fontSize || "16px",
-        borderRadius: 8,
+        borderRadius: borderRadius || 8,
+        paddingTop: py,
+        paddingBottom: py,
+        paddingLeft: px,
+        paddingRight: px,
       }}
-      className="px-5 py-2 flex justify-center text-nowrap whitespace-nowrap size-full items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+      className={`flex justify-center text-nowrap whitespace-nowrap size-full items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
     >
       {children}
     </button>

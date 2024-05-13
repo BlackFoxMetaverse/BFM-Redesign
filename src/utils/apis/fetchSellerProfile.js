@@ -9,3 +9,17 @@ export async function fetchSellerProfile(username) {
     return Promise.reject(error?.response?.data);
   }
 }
+
+export async function getSellerProfile(token) {
+  try {
+    const response = await instance.get("main/seller", {
+      headers: {
+        token: token,
+      },
+    });
+
+    return Promise.resolve(response?.data);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}

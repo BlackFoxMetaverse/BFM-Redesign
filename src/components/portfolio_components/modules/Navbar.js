@@ -2,11 +2,17 @@
 
 import PrimaryButton from "@/shared/buttons/PrimaryButton";
 import SecondaryButton from "@/shared/buttons/SecondaryButton";
-import TokenDetails from "@/utils/others/tokenDetails";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const PortfolioNavbar = () => {
+const PortfolioNavbar = ({ details }) => {
+  const router = useRouter();
+  const [uid, setUid] = useState(null);
+  useEffect(() => {
+    setUid(sessionStorage.getItem("bfm-seller-uid"));
+  }, []);
+
   return (
     <nav>
       <div className="w-11/12 py-10 mx-auto flex items-center justify-between">
@@ -15,14 +21,19 @@ const PortfolioNavbar = () => {
           alt=""
           width={96}
           height={30}
+          priority
           className="object-contain"
         />
-        <div className="flex items-center gap-7 text-balance">
-          <div className="sm:block hidden">
-            <PrimaryButton>Edit Profile</PrimaryButton>
+        {uid === details[1] ? (
+          <div className="flex items-center gap-7 text-balance">
+            <div className="sm:block hidden">
+              <PrimaryButton onClick={() => router.push("/form")}>
+                Edit Profile
+              </PrimaryButton>
+            </div>
+            <SecondaryButton>Share & Download</SecondaryButton>
           </div>
-          <SecondaryButton>Share & Download</SecondaryButton>
-        </div>
+        ) : null}
       </div>
     </nav>
   );

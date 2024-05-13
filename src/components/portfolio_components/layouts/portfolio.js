@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SkeletonLoader from "../../../shared/loader/SkeletonLoader";
 import { useSellerProfile } from "@/utils/hooks/useSellerProfile";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import {
-  FaAngleDown,
   FaAngleUp,
   FaBehance,
   FaDribbble,
@@ -24,6 +23,7 @@ import SellerCard from "../modules/SellerCard";
 import MediaGallery from "@/shared/MediaRendering/MediaGallery";
 import handleSendEmail from "@/utils/others/sendEmail";
 import handleScheduleMeet from "@/utils/others/scheduleMeet";
+import { useRouter } from "next/navigation";
 
 const SocialTypes = [
   {
@@ -53,8 +53,14 @@ const SocialTypes = [
 ];
 
 const PortfolioDetails = ({ details }) => {
+  const router = useRouter();
+  const [uid, setUid] = useState(null);
   const { sellerData, error, loading } = useSellerProfile(details[0]);
   const [viewAll, setViewAll] = useState(false);
+
+  useEffect(() => {
+    setUid(sessionStorage.getItem("bfm-seller-uid"));
+  }, []);
 
   function getIconByName(name) {
     const socialType = SocialTypes.find(
@@ -78,12 +84,17 @@ const PortfolioDetails = ({ details }) => {
           ) : (
             <div className="flex px-5 py-7 gap-5 size-full">
               <Image
-                src={sellerData?.image || "/Images/default_male.svg"}
+                src={
+                  sellerData?.image ||
+                  (sellerData?.gender === "male"
+                    ? "/images/default_male.svg"
+                    : "/images/default_female.svg")
+                }
                 width={100}
                 height={100}
                 alt=""
                 loading="lazy"
-                className="flex-1 size-full rounded-3xl object-cover aspect-square"
+                className="flex-1 rounded-3xl object-cover aspect-square"
               />
               <div className="flex-1 flex flex-col gap-2 text-pretty justify-between">
                 <div className="basicData">
@@ -107,12 +118,17 @@ const PortfolioDetails = ({ details }) => {
             </div>
           )}
         </div>
-        {sellerData && (
+        {sellerData && uid === details[1] && (
           <div className="sm:hidden block">
-            <PrimaryButton>Edit Profile</PrimaryButton>
+            <PrimaryButton
+              className="size-full"
+              onClick={() => router.push("/form")}
+            >
+              Edit Profile
+            </PrimaryButton>
           </div>
         )}
-        {sellerData && (
+        {sellerData && uid !== details[1] && (
           <PrimaryButton
             color={"white"}
             fontWeight={400}
@@ -125,7 +141,7 @@ const PortfolioDetails = ({ details }) => {
             Send Email
           </PrimaryButton>
         )}
-        {sellerData && (
+        {sellerData && uid !== details[1] && (
           <SecondaryButton
             border={"1px solid"}
             borderColor={"#4461F2"}

@@ -1,5 +1,3 @@
-import React from "react";
-
 const PrimaryButton = ({
   children,
   backgroundColor,
@@ -7,9 +5,13 @@ const PrimaryButton = ({
   width,
   height,
   type,
-  disabled,
+  disabled = false,
   color,
   fontWeight,
+  borderRadius,
+  px = 20,
+  py = 8,
+  className = "",
 }) => {
   return (
     <button
@@ -19,12 +21,16 @@ const PrimaryButton = ({
       style={{
         color: color || "black",
         fontWeight: fontWeight || "bold",
-        width: width || "100%",
+        width: width || "",
         height: height || "auto",
         backgroundColor: backgroundColor || "#fff",
-        borderRadius: 8,
+        borderRadius: borderRadius || 8,
+        paddingTop: py,
+        paddingBottom: py,
+        paddingLeft: px,
+        paddingRight: px,
       }}
-      className="px-5 py-2 disabled:opacity-50 text-nowrap whitespace-nowrap disabled:cursor-not-allowed"
+      className={`disabled:opacity-50 flex items-center justify-center gap-3 text-nowrap whitespace-nowrap disabled:cursor-not-allowed ${className}`}
     >
       {children}
     </button>

@@ -1,5 +1,5 @@
-import React from "react";
+import SellerForm from "@/components/form_components/layouts/SellerForm";
 
 export default function BFMForm() {
-  return <div>BFMForm</div>;
+  return <SellerForm />;
 }

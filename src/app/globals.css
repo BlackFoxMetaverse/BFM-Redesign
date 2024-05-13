@@ -7,3 +7,19 @@
     text-wrap: balance;
   }
 }
+
+::-webkit-outer-spin-button {
+  display: none;
+}
+
+::-webkit-inner-spin-button {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  @apply w-1.5 bg-white/50
+}
+
+::-webkit-scrollbar-thumb {
+  @apply w-full rounded-2xl bg-black
+}
