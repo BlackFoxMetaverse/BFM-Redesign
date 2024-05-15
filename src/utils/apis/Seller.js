@@ -1,9 +1,10 @@
 import instance from "../axios";
 
-export async function CreateSeller(sellerInputData, token) {
+export async function CreateSeller(formData, token) {
   try {
-    const response = await instance.post("/main/seller", sellerInputData, {
+    const response = await instance.post("/main/seller", formData, {
       headers: {
+        "Content-Type": "multipart/form-data",
         token: token,
       },
     });
@@ -14,10 +15,11 @@ export async function CreateSeller(sellerInputData, token) {
   }
 }
 
-export async function EditSeller(sellerInputData, token) {
+export async function EditSeller(formData, token) {
   try {
-    const response = await instance.put("/main/seller", sellerInputData, {
+    const response = await instance.put("/main/seller", formData, {
       headers: {
+        "Content-Type": "multipart/form-data",
         token: token,
       },
     });

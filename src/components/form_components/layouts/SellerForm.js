@@ -114,6 +114,37 @@ const SellerForm = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("image", sellerInputData.image);
+    formData.append("resume", sellerInputData.resume);
+    formData.append("name", sellerInputData.name);
+    formData.append("userName", sellerInputData.userName);
+    formData.append("gender", sellerInputData.gender);
+    formData.append("email", sellerInputData.email);
+    formData.append("phone_number", "+91" + sellerInputData.phone_number);
+    formData.append("city", sellerInputData.city);
+    formData.append("profession", sellerInputData.profession);
+    formData.append("experience", sellerInputData.experience);
+    formData.append("collegeName", sellerInputData.collegeName);
+    formData.append("description", sellerInputData.description);
+    formData.append("services", JSON.stringify(sellerInputData.services));
+    formData.append("skills", JSON.stringify(sellerInputData.skills));
+    formData.append(
+      "experienceDetails",
+      JSON.stringify(sellerInputData.experienceDetails)
+    );
+    formData.append(
+      "socialMediaLinks",
+      JSON.stringify(sellerInputData.socialMediaLinks)
+    );
+
+    sellerInputData.images.forEach((media, index) => {
+      formData.append("images", media);
+    });
+
+    formData.append("coordinates", JSON.stringify(sellerInputData.coordinates));
+
     try {
       const token =
         localStorage.getItem("bfm-seller-token") ||
@@ -131,16 +162,16 @@ const SellerForm = () => {
         }).then(() => setCurrentPageIndex(0));
       }
       if (isSeller) {
-        const data = await EditSeller(sellerInputData, token);
+        const data = await EditSeller(formData, token);
         router.replace(`/portfolio/${data?.username}/${data?.uid}`);
       } else {
-        const data = await CreateSeller(sellerInputData, token);
+        const data = await CreateSeller(formData, token);
         router.replace(`/portfolio/${data?.username}/${data?.uid}`);
       }
     } catch (error) {
       Swal.fire({
         title: "Error submitting form",
-        text: error.message || "Something went wrong",
+        text: error?.message || "Something went wrong",
         icon: "error",
         showConfirmButton: false,
         background: "black",
