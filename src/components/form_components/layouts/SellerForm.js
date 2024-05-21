@@ -48,7 +48,7 @@ const SellerForm = () => {
     coordinates: { longitude: 0, latitude: 0 },
   });
 
-  console.log(sellerInputData);
+  // console.log(sellerInputData);
 
   useEffect(() => {
     const token = sessionStorage.getItem("bfm-seller-token");
@@ -163,20 +163,45 @@ const SellerForm = () => {
       }
       if (isSeller) {
         const data = await EditSeller(formData, token);
-        router.replace(`/portfolio/${data?.username}/${data?.uid}`);
+        Swal.fire({
+          icon: "success",
+          title: "Successfully Updated",
+          text: "Your profile is successfully updated",
+          background: "black",
+          color: "white",
+          showConfirmButton: false,
+          timer: 2000,
+        }).then(() =>
+          router.replace(`/portfolio/${data?.userName}/${data?.uid}`)
+        );
       } else {
         const data = await CreateSeller(formData, token);
-        router.replace(`/portfolio/${data?.username}/${data?.uid}`);
+        Swal.fire({
+          icon: "success",
+          title: "Successfully Submitted",
+          text: "You are successfully submitted as a seller at BFM",
+          background: "black",
+          color: "white",
+          showConfirmButton: false,
+          timer: 2000,
+        }).then(() =>
+          router.replace(`/portfolio/${data?.userName}/${data?.uid}`)
+        );
       }
     } catch (error) {
       Swal.fire({
         title: "Error submitting form",
-        text: error?.message || "Something went wrong",
+        text:
+          error?.message || "Something went wrong Please try after sometime",
         icon: "error",
         showConfirmButton: false,
         background: "black",
         color: "white",
         timer: 2000,
+      }).then(() => {
+        // sessionStorage.removeItem("bfm-seller-token");
+        // sessionStorage.removeItem("bfm-seller-uid");
+        setCurrentPageIndex(0);
       });
     }
   }

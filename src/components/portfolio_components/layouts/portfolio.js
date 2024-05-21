@@ -5,15 +5,7 @@ import SkeletonLoader from "../../../shared/loader/SkeletonLoader";
 import { useSellerProfile } from "@/utils/hooks/useSellerProfile";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
-import {
-  FaAngleUp,
-  FaBehance,
-  FaDribbble,
-  FaGithub,
-  FaGlobe,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa6";
+import { FaAngleUp } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 import PrimaryButton from "@/shared/buttons/PrimaryButton";
@@ -24,33 +16,7 @@ import MediaGallery from "@/shared/MediaRendering/MediaGallery";
 import handleSendEmail from "@/utils/others/sendEmail";
 import handleScheduleMeet from "@/utils/others/scheduleMeet";
 import { useRouter } from "next/navigation";
-
-const SocialTypes = [
-  {
-    name: "LinkedIn",
-    icon: <FaLinkedinIn />,
-  },
-  {
-    name: "Instagram",
-    icon: <FaInstagram />,
-  },
-  {
-    name: "Behance",
-    icon: <FaBehance />,
-  },
-  {
-    name: "Dribble",
-    icon: <FaDribbble />,
-  },
-  {
-    name: "Github",
-    icon: <FaGithub />,
-  },
-  {
-    name: "Website",
-    icon: <FaGlobe />,
-  },
-];
+import { SellerSocials } from "@/shared/bfm_socials/SellerSocials";
 
 const PortfolioDetails = ({ details }) => {
   const router = useRouter();
@@ -63,7 +29,7 @@ const PortfolioDetails = ({ details }) => {
   }, []);
 
   function getIconByName(name) {
-    const socialType = SocialTypes.find(
+    const socialType = SellerSocials.find(
       (social) => social.name.toLowerCase() === name?.toLowerCase()
     );
     return socialType ? socialType.icon : null;
@@ -137,6 +103,7 @@ const PortfolioDetails = ({ details }) => {
             onClick={() => {
               handleSendEmail(sellerData?.email);
             }}
+            className="size-full"
           >
             Send Email
           </PrimaryButton>

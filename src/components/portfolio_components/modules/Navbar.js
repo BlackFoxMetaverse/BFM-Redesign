@@ -3,15 +3,18 @@
 import PrimaryButton from "@/shared/buttons/PrimaryButton";
 import SecondaryButton from "@/shared/buttons/SecondaryButton";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PortfolioNavbar = ({ details }) => {
   const router = useRouter();
+  const params = useParams();
   const [uid, setUid] = useState(null);
   useEffect(() => {
     setUid(sessionStorage.getItem("bfm-seller-uid"));
   }, []);
+
+  const handleShare = () => {};
 
   return (
     <nav>
@@ -31,7 +34,9 @@ const PortfolioNavbar = ({ details }) => {
                 Edit Profile
               </PrimaryButton>
             </div>
-            <SecondaryButton>Share & Download</SecondaryButton>
+            <SecondaryButton onClick={handleShare}>
+              Share & Download
+            </SecondaryButton>
           </div>
         ) : null}
       </div>

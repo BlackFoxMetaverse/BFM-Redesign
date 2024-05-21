@@ -45,7 +45,7 @@ export async function checkPhoneNumber(value = "") {
     if (value === "") return Promise.resolve(true);
     const uid = sessionStorage.getItem("bfm-seller-uid");
     const response = await instance.get(
-      `/check/phone?uid=${uid}&phone_number= ${encodeURIComponent(
+      `/check/phone?uid=${uid}&phone_number=${encodeURIComponent(
         "+91" + value
       )}`
     );

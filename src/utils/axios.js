@@ -2,8 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://api.blackfoxmetaverse.io",
-  // baseURL:
-  //   "https://7780-2405-201-4014-6807-3dbd-8c6f-b161-116b.ngrok-free.app/",
+  // baseURL: "https://jlol8hc60c.execute-api.ap-south-1.amazonaws.com/dev",
 });
 
 export default instance;
