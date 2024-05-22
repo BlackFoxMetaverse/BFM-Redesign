@@ -34,7 +34,21 @@ const PortfolioNavbar = ({ details }) => {
                 Edit Profile
               </PrimaryButton>
             </div>
-            {/* <SecondaryButton onClick={handleShare}>Share</SecondaryButton> */}
+            <SecondaryButton
+              onClick={() =>
+                Swal.fire({
+                  title: "Feature available soon",
+                  icon: "info",
+                  text: "Sharing Feature will be available soon",
+                  timer: 2000,
+                  showConfirmButton: false,
+                  background: "black",
+                  color: "white",
+                })
+              }
+            >
+              Share
+            </SecondaryButton>
           </div>
         ) : null}
       </div>
