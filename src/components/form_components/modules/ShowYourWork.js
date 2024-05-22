@@ -12,6 +12,7 @@ const ShowYourWork = ({
   sellerInputData = {},
   setSellerInputData = () => {},
   handleSubmit = () => {},
+  isSubmitted = false,
 }) => {
   // For Media
 
@@ -181,6 +182,7 @@ const ShowYourWork = ({
         backgroundColor={"#4461F2"}
         color={"white"}
         fontWeight={400}
+        disabled={isSubmitted}
         className="col-span-2 capitalize tracking-wide"
       >
         Save and complete

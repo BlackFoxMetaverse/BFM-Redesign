@@ -10,7 +10,6 @@ import { getUsersLocation } from "@/utils/location/getUsersLocation";
 import Swal from "sweetalert2";
 import { checkUserDataByToken } from "@/utils/apis/checkUser";
 import { useRouter } from "next/navigation";
-import instance from "@/utils/axios";
 import { CreateSeller, EditSeller } from "@/utils/apis/Seller";
 
 const formPages = [
@@ -26,7 +25,7 @@ const SellerForm = () => {
 
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isSeller, setIsSeller] = useState(false);
-  const [token, setToken] = useState(null);
+  const [isSubmitted, setSubmitted] = useState(false);
   const [sellerInputData, setSellerInputData] = useState({
     image: null,
     name: "",
@@ -62,7 +61,7 @@ const SellerForm = () => {
       .catch((error) => {
         Swal.fire({
           icon: "warning",
-          title: error?.message,
+          title: "Allow Location!!",
           text: "We need to know your location show that the client can find you if you are nearby",
           showCancelButton: true,
           cancelButtonText: "Cancel",
@@ -151,7 +150,6 @@ const SellerForm = () => {
       const token =
         localStorage.getItem("bfm-seller-token") ||
         sessionStorage.getItem("bfm-seller-token");
-
       if (!token) {
         Swal.fire({
           title: "You need to login",
@@ -173,9 +171,9 @@ const SellerForm = () => {
           color: "white",
           showConfirmButton: false,
           timer: 2000,
-        }).then(() =>
-          router.replace(`/portfolio/${data?.userName}/${data?.uid}`)
-        );
+        }).then(() => {
+          router.replace(`/portfolio/${data?.userName}/${data?.uid}`);
+        });
       } else {
         const data = await CreateSeller(formData, token);
         Swal.fire({
@@ -186,10 +184,11 @@ const SellerForm = () => {
           color: "white",
           showConfirmButton: false,
           timer: 2000,
-        }).then(() =>
-          router.replace(`/portfolio/${data?.userName}/${data?.uid}`)
-        );
+        }).then(() => {
+          router.replace(`/portfolio/${data?.userName}/${data?.uid}`);
+        });
       }
+      setSubmitted(true);
     } catch (error) {
       Swal.fire({
         title: "Error submitting form",
@@ -201,10 +200,9 @@ const SellerForm = () => {
         color: "white",
         timer: 2000,
       }).then(() => {
-        // sessionStorage.removeItem("bfm-seller-token");
-        // sessionStorage.removeItem("bfm-seller-uid");
         setCurrentPageIndex(0);
       });
+      setSubmitted(false);
     }
   }
 
@@ -260,6 +258,7 @@ const SellerForm = () => {
           sellerInputData={sellerInputData}
           setSellerInputData={setSellerInputData}
           handleSubmit={handleSubmit}
+          isSubmitted={isSubmitted}
         />
       ) : null}
     </div>

@@ -34,9 +34,7 @@ const PortfolioNavbar = ({ details }) => {
                 Edit Profile
               </PrimaryButton>
             </div>
-            <SecondaryButton onClick={handleShare}>
-              Share & Download
-            </SecondaryButton>
+            {/* <SecondaryButton onClick={handleShare}>Share</SecondaryButton> */}
           </div>
         ) : null}
       </div>
