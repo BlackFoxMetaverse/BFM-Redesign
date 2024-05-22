@@ -48,7 +48,7 @@ const SellerForm = () => {
     coordinates: { longitude: 0, latitude: 0 },
   });
 
-  // console.log(sellerInputData);
+  console.log(sellerInputData);
 
   useEffect(() => {
     const token = sessionStorage.getItem("bfm-seller-token");
