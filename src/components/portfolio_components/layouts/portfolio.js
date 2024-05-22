@@ -53,8 +53,8 @@ const PortfolioDetails = ({ details }) => {
                 src={
                   sellerData?.image ||
                   (sellerData?.gender === "male"
-                    ? "/images/default_male.svg"
-                    : "/images/default_female.svg")
+                    ? "/assets/default_male.svg"
+                    : "/assets/default_female.svg")
                 }
                 width={100}
                 height={100}

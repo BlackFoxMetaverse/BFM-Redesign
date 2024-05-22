@@ -103,8 +103,8 @@ const PersonalScreen = ({
           <Image
             src={
               sellerInputData?.gender === "male"
-                ? "/images/default_male.svg"
-                : "/images/default_female.svg"
+                ? "/assets/default_male.svg"
+                : "/assets/default_female.svg"
             }
             alt=""
             width={100}

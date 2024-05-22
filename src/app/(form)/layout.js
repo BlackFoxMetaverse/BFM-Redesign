@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
       <section className="flex lg:flex-row flex-col lg:justify-between items-center gap-16 min-h-screen w-11/12 mx-auto py-12">
         <div className="left flex flex-col justify-center items-center gap-10 lg:w-1/3 relative">
           <Image
-            src={"/images/form_background.gif"}
+            src={"/assets/form_background.gif"}
             height={500}
             width={500}
             alt=""

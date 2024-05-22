@@ -66,6 +66,8 @@ const SellerForm = () => {
           text: "We need to know your location show that the client can find you if you are nearby",
           showCancelButton: true,
           cancelButtonText: "Cancel",
+          background: "black",
+          color: "white",
           confirmButtonText: "Allow Location",
         }).then((result) =>
           result.isConfirmed
