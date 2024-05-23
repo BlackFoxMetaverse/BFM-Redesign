@@ -1,3 +1,4 @@
+import { FileToUrl } from "@/shared/actions/convertFileToUrl";
 import { Socials } from "@/shared/bfm_socials/Social";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
             alt=""
             priority
             unoptimized
-            className="lg:w-3/4 w-full filter grayscale absolute aspect-square self-center"
+            className="lg:w-5/6 w-full grayscale absolute inset-0 mx-auto aspect-square self-center"
           />
           <Image
             src={"/logos/white_fox.svg"}
