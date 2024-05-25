@@ -62,7 +62,7 @@ const SellerForm = () => {
         Swal.fire({
           icon: "warning",
           title: "Allow Location!!",
-          text: "We need to know your location show that the client can find you if you are nearby",
+          text: "We need to know your location so that the client can find you if you are nearby",
           showCancelButton: true,
           cancelButtonText: "Cancel",
           background: "black",
