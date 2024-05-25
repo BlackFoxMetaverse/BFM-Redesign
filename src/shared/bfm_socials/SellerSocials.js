@@ -3,7 +3,6 @@ const {
   FaDribbble,
   FaLinkedinIn,
   FaInstagram,
-  FaFacebookF,
   FaGoogleDrive,
   FaGlobe,
   FaGithub,

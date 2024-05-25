@@ -5,6 +5,7 @@ import SecondaryButton from "@/shared/buttons/SecondaryButton";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const PortfolioNavbar = ({ details }) => {
   const router = useRouter();

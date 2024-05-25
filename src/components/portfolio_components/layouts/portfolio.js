@@ -28,7 +28,7 @@ const PortfolioDetails = ({ details }) => {
     setUid(sessionStorage.getItem("bfm-seller-uid"));
   }, []);
 
-  function getIconByName(name) {
+  function getIconByName(name = "") {
     const socialType = SellerSocials.find(
       (social) => social.name.toLowerCase() === name?.toLowerCase()
     );

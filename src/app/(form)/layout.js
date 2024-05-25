@@ -1,4 +1,3 @@
-import { FileToUrl } from "@/shared/actions/convertFileToUrl";
 import { Socials } from "@/shared/bfm_socials/Social";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,13 +8,13 @@ export default function RootLayout({ children }) {
       <section className="flex lg:flex-row flex-col lg:justify-between items-center gap-16 min-h-screen w-11/12 mx-auto py-12">
         <div className="left flex flex-col justify-center items-center gap-10 lg:w-1/3 relative">
           <Image
-            src={"/assets/form_background.gif"}
+            src={"/assets/output-onlinegiftools.gif"}
             height={500}
             width={500}
             alt=""
             priority
             unoptimized
-            className="lg:w-5/6 w-full grayscale absolute inset-0 mx-auto aspect-square self-center"
+            className="lg:w-5/6 w-full grayscale opacity-50 absolute inset-0 mx-auto aspect-square self-center"
           />
           <Image
             src={"/logos/white_fox.svg"}
