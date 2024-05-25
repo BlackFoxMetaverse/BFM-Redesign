@@ -15,7 +15,8 @@ const SignUpComponent = ({
     handleGoogleSignIn()
       .then((data) => {
         if (data.isExistingUser) {
-          navigate(`/portfolio/${data?.username}/${data?.uid}`) || navigate(to);
+          navigate(`/portfolio/${data?.username}?uid=${data?.uid}`) ||
+            navigate(to);
         } else {
           setSellerInputData((prev) => ({ ...prev, ...data }));
           setCurrentPageIndex(1) || navigate(to);
