@@ -2,20 +2,15 @@
 
 import PrimaryButton from "@/shared/buttons/PrimaryButton";
 import SecondaryButton from "@/shared/buttons/SecondaryButton";
+import { useSellerProfile } from "@/utils/hooks/useSellerProfile";
+import { handleShare } from "@/utils/others/sharing";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const PortfolioNavbar = ({ details }) => {
+  const { sellerData, error, loading } = useSellerProfile(details[0]);
   const router = useRouter();
-  const params = useParams();
-  const [uid, setUid] = useState(null);
-  useEffect(() => {
-    setUid(sessionStorage.getItem("bfm-seller-uid"));
-  }, []);
-
-  const handleShare = () => {};
+  const searchParams = useSearchParams();
 
   return (
     <nav>
@@ -28,7 +23,7 @@ const PortfolioNavbar = ({ details }) => {
           priority
           className="object-contain"
         />
-        {uid === details[1] ? (
+        {sellerData?.uid === searchParams.get("uid").toString() ? (
           <div className="flex items-center gap-7 text-balance">
             <div className="sm:block hidden">
               <PrimaryButton onClick={() => router.push("/form")}>
@@ -37,15 +32,20 @@ const PortfolioNavbar = ({ details }) => {
             </div>
             <SecondaryButton
               onClick={() =>
-                Swal.fire({
-                  title: "Feature available soon",
-                  icon: "info",
-                  text: "Sharing Feature will be available soon",
-                  timer: 2000,
-                  showConfirmButton: false,
-                  background: "black",
-                  color: "white",
-                })
+                // Swal.fire({
+                //   title: "Feature available soon",
+                //   icon: "info",
+                //   text: "Sharing Feature will be available soon",
+                //   timer: 2000,
+                //   showConfirmButton: false,
+                //   background: "black",
+                //   color: "white",
+                // })
+                handleShare(
+                  window.location.href.split("?")[0],
+                  "My Portfolio on BFM",
+                  "Portfolio link is copied to clipboard"
+                )
               }
             >
               Share

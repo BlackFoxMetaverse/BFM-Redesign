@@ -15,18 +15,14 @@ import SellerCard from "../modules/SellerCard";
 import MediaGallery from "@/shared/MediaRendering/MediaGallery";
 import handleSendEmail from "@/utils/others/sendEmail";
 import handleScheduleMeet from "@/utils/others/scheduleMeet";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { SellerSocials } from "@/shared/bfm_socials/SellerSocials";
 
 const PortfolioDetails = ({ details }) => {
   const router = useRouter();
-  const [uid, setUid] = useState(null);
+  const searchParams = useSearchParams();
   const { sellerData, error, loading } = useSellerProfile(details[0]);
   const [viewAll, setViewAll] = useState(false);
-
-  useEffect(() => {
-    setUid(sessionStorage.getItem("bfm-seller-uid"));
-  }, []);
 
   function getIconByName(name = "") {
     const socialType = SellerSocials.find(
@@ -84,42 +80,45 @@ const PortfolioDetails = ({ details }) => {
             </div>
           )}
         </div>
-        {sellerData && uid === details[1] && (
-          <div className="sm:hidden block">
+        {sellerData &&
+          sellerData?.uid === searchParams.get("uid").toString() && (
+            <div className="sm:hidden block">
+              <PrimaryButton
+                className="size-full"
+                onClick={() => router.push("/form")}
+              >
+                Edit Profile
+              </PrimaryButton>
+            </div>
+          )}
+        {sellerData &&
+          sellerData?.uid !== searchParams.get("uid").toString() && (
             <PrimaryButton
+              color={"white"}
+              fontWeight={400}
+              backgroundColor={"#4461F2"}
+              type="button"
+              onClick={() => {
+                handleSendEmail(sellerData?.email);
+              }}
               className="size-full"
-              onClick={() => router.push("/form")}
             >
-              Edit Profile
+              Send Email
             </PrimaryButton>
-          </div>
-        )}
-        {sellerData && uid !== details[1] && (
-          <PrimaryButton
-            color={"white"}
-            fontWeight={400}
-            backgroundColor={"#4461F2"}
-            type="button"
-            onClick={() => {
-              handleSendEmail(sellerData?.email);
-            }}
-            className="size-full"
-          >
-            Send Email
-          </PrimaryButton>
-        )}
-        {sellerData && uid !== details[1] && (
-          <SecondaryButton
-            border={"1px solid"}
-            borderColor={"#4461F2"}
-            type="button"
-            onClick={() => {
-              handleScheduleMeet(sellerData?.userName);
-            }}
-          >
-            Schedule Meet
-          </SecondaryButton>
-        )}
+          )}
+        {sellerData &&
+          sellerData?.uid !== searchParams.get("uid").toString() && (
+            <SecondaryButton
+              border={"1px solid"}
+              borderColor={"#4461F2"}
+              type="button"
+              onClick={() => {
+                handleScheduleMeet(sellerData?.userName);
+              }}
+            >
+              Schedule Meet
+            </SecondaryButton>
+          )}
         <div
           className={`w-full overflow-hidden max-w-full ${
             loading ? "aspect-[7/1] min-h-10" : "py-2 px-5"

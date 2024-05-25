@@ -172,7 +172,7 @@ const SellerForm = () => {
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {
-          router.replace(`/portfolio/${data?.userName}/${data?.uid}`);
+          router.replace(`/portfolio/${data?.userName}?uid=${data?.uid}`);
         });
       } else {
         const data = await CreateSeller(formData, token);
@@ -185,7 +185,7 @@ const SellerForm = () => {
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {
-          router.replace(`/portfolio/${data?.userName}/${data?.uid}`);
+          router.replace(`/portfolio/${data?.userName}?uid=${data?.uid}`);
         });
       }
       setSubmitted(true);
