@@ -1,6 +1,10 @@
 import Swal from "sweetalert2";
 
-export async function handleShare(url = "", title = "", text = "") {
+export async function handleShare(
+  url = window.location.href,
+  title = "",
+  text = ""
+) {
   try {
     if (navigator.canShare) {
       await navigator.share({
@@ -21,6 +25,10 @@ export async function handleShare(url = "", title = "", text = "") {
     }
   } catch (error) {
     console.error(error);
-    // window.alert(error?.message);
+    Swal.fire({
+      icon: "error",
+      title: "Error occurred while sharing",
+      text: error?.message || "Something went wrong while sharing",
+    });
   }
 }

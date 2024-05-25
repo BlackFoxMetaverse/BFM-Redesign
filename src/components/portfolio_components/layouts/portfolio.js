@@ -20,7 +20,7 @@ import { SellerSocials } from "@/shared/bfm_socials/SellerSocials";
 
 const PortfolioDetails = ({ details }) => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const uid = useSearchParams().get("uid");
   const { sellerData, error, loading } = useSellerProfile(details[0]);
   const [viewAll, setViewAll] = useState(false);
 
@@ -80,45 +80,42 @@ const PortfolioDetails = ({ details }) => {
             </div>
           )}
         </div>
-        {sellerData &&
-          sellerData?.uid === searchParams.get("uid").toString() && (
-            <div className="sm:hidden block">
-              <PrimaryButton
-                className="size-full"
-                onClick={() => router.push("/form")}
-              >
-                Edit Profile
-              </PrimaryButton>
-            </div>
-          )}
-        {sellerData &&
-          sellerData?.uid !== searchParams.get("uid").toString() && (
+        {sellerData && sellerData?.uid === uid?.toString() && (
+          <div className="sm:hidden block">
             <PrimaryButton
-              color={"white"}
-              fontWeight={400}
-              backgroundColor={"#4461F2"}
-              type="button"
-              onClick={() => {
-                handleSendEmail(sellerData?.email);
-              }}
               className="size-full"
+              onClick={() => router.push("/form")}
             >
-              Send Email
+              Edit Profile
             </PrimaryButton>
-          )}
-        {sellerData &&
-          sellerData?.uid !== searchParams.get("uid").toString() && (
-            <SecondaryButton
-              border={"1px solid"}
-              borderColor={"#4461F2"}
-              type="button"
-              onClick={() => {
-                handleScheduleMeet(sellerData?.userName);
-              }}
-            >
-              Schedule Meet
-            </SecondaryButton>
-          )}
+          </div>
+        )}
+        {sellerData && sellerData?.uid !== uid?.toString() && (
+          <PrimaryButton
+            color={"white"}
+            fontWeight={400}
+            backgroundColor={"#4461F2"}
+            type="button"
+            onClick={() => {
+              handleSendEmail(sellerData?.email);
+            }}
+            className="size-full"
+          >
+            Send Email
+          </PrimaryButton>
+        )}
+        {sellerData && sellerData?.uid !== uid?.toString() && (
+          <SecondaryButton
+            border={"1px solid"}
+            borderColor={"#4461F2"}
+            type="button"
+            onClick={() => {
+              handleScheduleMeet(sellerData?.userName);
+            }}
+          >
+            Schedule Meet
+          </SecondaryButton>
+        )}
         <div
           className={`w-full overflow-hidden max-w-full ${
             loading ? "aspect-[7/1] min-h-10" : "py-2 px-5"

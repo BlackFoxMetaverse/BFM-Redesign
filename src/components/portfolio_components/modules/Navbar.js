@@ -10,7 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 const PortfolioNavbar = ({ details }) => {
   const { sellerData, error, loading } = useSellerProfile(details[0]);
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const uid = useSearchParams().get("uid");
 
   return (
     <nav>
@@ -23,7 +23,7 @@ const PortfolioNavbar = ({ details }) => {
           priority
           className="object-contain"
         />
-        {sellerData?.uid === searchParams.get("uid").toString() ? (
+        {sellerData?.uid === uid?.toString() ? (
           <div className="flex items-center gap-7 text-balance">
             <div className="sm:block hidden">
               <PrimaryButton onClick={() => router.push("/form")}>
@@ -31,24 +31,15 @@ const PortfolioNavbar = ({ details }) => {
               </PrimaryButton>
             </div>
             <SecondaryButton
-              onClick={() =>
-                // Swal.fire({
-                //   title: "Feature available soon",
-                //   icon: "info",
-                //   text: "Sharing Feature will be available soon",
-                //   timer: 2000,
-                //   showConfirmButton: false,
-                //   background: "black",
-                //   color: "white",
-                // })
-                handleShare(
+              onClick={async () =>
+                await handleShare(
                   window.location.href.split("?")[0],
                   "My Portfolio on BFM",
                   "Portfolio link is copied to clipboard"
                 )
               }
             >
-              Share
+              Share Profile
             </SecondaryButton>
           </div>
         ) : null}
