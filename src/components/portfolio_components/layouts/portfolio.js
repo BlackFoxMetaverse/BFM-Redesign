@@ -116,28 +116,30 @@ const PortfolioDetails = ({ details }) => {
             Schedule Meet
           </SecondaryButton>
         )}
-        <div
-          className={`w-full overflow-hidden max-w-full ${
-            loading ? "aspect-[7/1] min-h-10" : "py-2 px-5"
-          } rounded-xl bg-[#1D1D1D]`}
-        >
-          {loading ? (
-            <SkeletonLoader />
-          ) : (
-            <div className="flex items-center gap-5 justify-center">
-              {sellerData?.socialMediaLinks?.map((social) => (
-                <Link
-                  href={social?.link}
-                  key={social?._id}
-                  target="_blank"
-                  className="text-2xl"
-                >
-                  {getIconByName(social?.platformType)}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+        {sellerData?.socialMediaLinks.length === 0 ? null : (
+          <div
+            className={`w-full overflow-hidden max-w-full ${
+              loading ? "aspect-[7/1] min-h-10" : "py-2 px-5"
+            } rounded-xl bg-[#1D1D1D]`}
+          >
+            {loading ? (
+              <SkeletonLoader />
+            ) : (
+              <div className="flex items-center gap-5 justify-center">
+                {sellerData?.socialMediaLinks?.map((social) => (
+                  <Link
+                    href={social?.link}
+                    key={social?._id}
+                    target="_blank"
+                    className="text-2xl"
+                  >
+                    {getIconByName(social?.platformType)}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
         <button
           type="button"
           style={{
